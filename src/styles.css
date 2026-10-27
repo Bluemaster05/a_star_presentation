@@ -168,20 +168,25 @@ body,
 
 .reveal .race {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
   cursor: pointer;
 }
 
 .reveal .race-panel h4 {
-  font-size: 0.7em;
+  font-size: 0.65em;
   text-transform: none;
-  margin-bottom: 12px;
+  margin-bottom: 2px;
+}
+.reveal .race-formula {
+  font-size: 0.45em;
+  color: var(--muted);
+  margin: 0 0 10px;
 }
 
 .reveal .race-grid {
   display: grid;
-  gap: 2px;
+  gap: 1px;
 }
 
 .reveal .cell {

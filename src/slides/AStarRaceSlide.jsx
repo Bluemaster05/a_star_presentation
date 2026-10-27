@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Slide } from '@revealjs/react';
 import { useFragmentStep } from '../hooks/useFragmentStep.js';
-import { COLS, ROWS, START, GOAL, walls, search } from '../astar/grid.js';
+import { COLS, ROWS, START, GOAL, walls, search, heuristics } from '../astar/grid.js';
 
-const dijkstra = search(false);
-const astar = search(true);
-const END = Math.max(dijkstra.expansions, astar.expansions);
+const runs = [
+  { title: 'Dijkstra', formula: 'h = 0', result: search(heuristics.none) },
+  { title: 'A* · Euclidean', formula: 'h = √(Δx² + Δy²)', result: search(heuristics.euclidean) },
+  { title: 'A* · Manhattan', formula: 'h = |Δx| + |Δy|', result: search(heuristics.manhattan) },
+];
+const END = Math.max(...runs.map((r) => r.result.expansions));
 const EXPANSIONS_PER_SECOND = 90;
 
 const cells = [];
@@ -32,7 +35,7 @@ function useSearchClock(playing, runId) {
   return t;
 }
 
-function Grid({ title, result, t }) {
+function Grid({ title, formula, result, t }) {
   const done = t >= result.expansions;
   const explored = Math.min(Math.floor(t), result.expansions);
 
@@ -49,6 +52,7 @@ function Grid({ title, result, t }) {
   return (
     <div className="race-panel">
       <h4>{title}</h4>
+      <p className="race-formula">{formula}</p>
       <div className="race-grid" style={{ gridTemplateColumns: `repeat(${COLS}, 1fr)` }}>
         {cells.map((c) => (
           <div key={c.k} className={`cell ${cellClass(c)}`} />
@@ -70,10 +74,11 @@ export default function AStarRaceSlide() {
 
   return (
     <Slide>
-      <h3 ref={markerRef}>Dijkstra vs A*</h3>
+      <h3 ref={markerRef}>The Heuristic Matters</h3>
       <div className="race" onClick={() => setRunId((r) => r + 1)} title="Click to replay">
-        <Grid title="Dijkstra — priority = g" result={dijkstra} t={t} />
-        <Grid title="A* — priority = g + h" result={astar} t={t} />
+        {runs.map((run) => (
+          <Grid key={run.title} {...run} t={t} />
+        ))}
       </div>
       <div className="race-legend">
         <span><i className="cell start" /> start</span>

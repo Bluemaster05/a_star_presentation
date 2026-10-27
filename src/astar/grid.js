@@ -9,7 +9,13 @@ export const walls = new Set();
 for (let y = 0; y <= 9; y++) walls.add(`${12},${y}`);
 
 const key = (x, y) => `${x},${y}`;
-const manhattan = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+
+// Heuristics: estimated distance from cell `c` to the goal.
+export const heuristics = {
+  none: () => 0,
+  euclidean: (c) => Math.hypot(c.x - GOAL.x, c.y - GOAL.y),
+  manhattan: (c) => Math.abs(c.x - GOAL.x) + Math.abs(c.y - GOAL.y),
+};
 
 // Runs a best-first search and records *when* each cell happened, measured in
 // expansions, so the slide can replay the search at any point in time.
@@ -18,10 +24,9 @@ const manhattan = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 //   path:          cells on the final path, start → goal
 //   expansions:    total cells expanded before reaching the goal
 //
-// `useHeuristic` false → Dijkstra (priority = g)
-// `useHeuristic` true  → A*       (priority = g + h, ties broken on smaller h)
-export function search(useHeuristic) {
-  const h = (c) => (useHeuristic ? manhattan(c, GOAL) : 0);
+// heuristics.none → Dijkstra (priority = g)
+// anything else   → A*       (priority = g + h, ties broken on smaller h)
+export function search(h) {
   const g = { [key(START.x, START.y)]: 0 };
   const prev = {};
   const openedAt = { [key(START.x, START.y)]: 0 };
