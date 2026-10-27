@@ -1,31 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { Slide, useReveal } from '@revealjs/react';
+import { useRef } from 'react';
+import { Slide } from '@revealjs/react';
+import { useFragmentStep } from '../hooks/useFragmentStep.js';
 import { vertices, edges, START } from '../dijkstra/graph.js';
 import { buildSteps, edgeKey } from '../dijkstra/steps.js';
 
 const steps = buildSteps(vertices, edges, START);
 const byId = Object.fromEntries(vertices.map((v) => [v.id, v]));
-
-// Each Reveal fragment on this slide advances the algorithm by one step.
-// Counting the visible fragments keeps us in sync with forward/back navigation.
-function useFragmentStep(markerRef) {
-  const deck = useReveal();
-  const [step, setStep] = useState(0);
-
-  useEffect(() => {
-    if (!deck) return;
-    const update = () => {
-      const section = markerRef.current?.closest('section');
-      if (section) setStep(section.querySelectorAll('.fragment.visible').length);
-    };
-    const events = ['ready', 'slidechanged', 'fragmentshown', 'fragmenthidden'];
-    events.forEach((e) => deck.on(e, update));
-    update();
-    return () => events.forEach((e) => deck.off(e, update));
-  }, [deck, markerRef]);
-
-  return step;
-}
 
 function Graph({ state }) {
   const { rows, current, relaxing } = state;

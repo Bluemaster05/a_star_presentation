@@ -163,3 +163,77 @@ body,
   font-size: 0.45em;
   color: var(--muted);
 }
+
+/* ---------- Dijkstra vs A* race ---------- */
+
+.reveal .race {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  cursor: pointer;
+}
+
+.reveal .race-panel h4 {
+  font-size: 0.7em;
+  text-transform: none;
+  margin-bottom: 12px;
+}
+
+.reveal .race-grid {
+  display: grid;
+  gap: 2px;
+}
+
+.reveal .cell {
+  aspect-ratio: 1;
+  background: #262626;
+  border-radius: 2px;
+  transition: background 0.25s;
+}
+.reveal .cell.wall {
+  background: #9ca3af;
+}
+.reveal .cell.open {
+  background: var(--relax);
+}
+.reveal .cell.closed {
+  background: var(--known);
+}
+.reveal .cell.path {
+  background: var(--accent);
+}
+.reveal .cell.start {
+  background: #22c55e;
+}
+.reveal .cell.goal {
+  background: #ef4444;
+}
+
+.reveal .race-stats {
+  font-size: 0.55em;
+  margin: 12px 0 0;
+}
+.reveal .race-stats strong {
+  color: var(--accent);
+}
+.reveal .race-done {
+  color: var(--muted);
+}
+
+.reveal .race-legend {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  font-size: 0.45em;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.reveal .race-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.reveal .race-legend .cell {
+  display: inline-block;
+  width: 16px;
+}
