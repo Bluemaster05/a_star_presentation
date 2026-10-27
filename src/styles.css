@@ -1,0 +1,165 @@
+:root {
+  --accent: #42affa;
+  --relax: #ffb347;
+  --muted: #6b7280;
+  --edge: #4b5563;
+  --known: #1e3a5f;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.reveal .subtitle {
+  color: var(--muted);
+  font-size: 1.1em;
+}
+
+/* Step markers are invisible; they only exist so Reveal steps through them. */
+.reveal .step-marker {
+  display: none;
+}
+
+/* ---------- Dijkstra slide ---------- */
+
+.reveal .dijkstra {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.reveal .graph {
+  width: 100%;
+  height: auto;
+}
+
+/* Edges */
+.graph .edge line {
+  stroke: var(--edge);
+  stroke-width: 4;
+  transition: stroke 0.4s, stroke-width 0.4s;
+}
+.graph .edge .weight-bg {
+  fill: #191919;
+  stroke: var(--edge);
+  stroke-width: 2;
+  transition: stroke 0.4s;
+}
+.graph .edge .weight {
+  fill: #d1d5db;
+  font-size: 18px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.graph .edge.tree line,
+.graph .edge.tree .weight-bg {
+  stroke: var(--accent);
+}
+.graph .edge.tree line {
+  stroke-width: 7;
+}
+.graph .edge.relaxing line {
+  stroke: var(--relax);
+  stroke-width: 7;
+  stroke-dasharray: 14 10;
+  animation: march 0.8s linear infinite;
+}
+.graph .edge.relaxing .weight-bg {
+  stroke: var(--relax);
+}
+@keyframes march {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+/* Vertices */
+.graph .vertex circle {
+  fill: #191919;
+  stroke: #e5e7eb;
+  stroke-width: 3;
+  transition: fill 0.4s, stroke 0.4s;
+}
+.graph .vertex text {
+  fill: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.graph .vertex.known circle {
+  fill: var(--known);
+  stroke: var(--accent);
+}
+.graph .vertex.current circle {
+  fill: var(--accent);
+  stroke: #fff;
+  filter: drop-shadow(0 0 10px var(--accent));
+}
+.graph .vertex.current text {
+  fill: #0b1220;
+}
+
+/* Table */
+.reveal table.dijkstra-table {
+  font-size: 0.8em;
+  border-collapse: collapse;
+  margin: 0;
+  width: 100%;
+}
+.reveal table.dijkstra-table th,
+.reveal table.dijkstra-table td {
+  text-align: center;
+  padding: 0.3em 0.6em;
+  border-bottom: 1px solid #333;
+}
+.reveal table.dijkstra-table th {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+.reveal table.dijkstra-table tr {
+  transition: background 0.4s;
+}
+.reveal table.dijkstra-table tr.current {
+  background: rgba(66, 175, 250, 0.18);
+}
+.reveal table.dijkstra-table td.no {
+  color: var(--muted);
+}
+.reveal table.dijkstra-table td.yes {
+  color: var(--accent);
+  font-weight: 700;
+}
+.reveal table.dijkstra-table td.flash {
+  animation: flash 1.2s ease-out;
+}
+@keyframes flash {
+  0% {
+    background: var(--relax);
+    color: #111;
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+.reveal .caption {
+  font-size: 0.6em;
+  min-height: 2.6em;
+  margin-top: 16px;
+  color: #e5e7eb;
+}
+
+.reveal .step-counter {
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  font-size: 0.45em;
+  color: var(--muted);
+}
