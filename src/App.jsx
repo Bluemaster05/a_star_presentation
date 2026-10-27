@@ -5,6 +5,7 @@ import './styles.css';
 
 import IntroSlide from './slides/IntroSlide.jsx';
 import DijkstraSlide from './slides/DijkstraSlide.jsx';
+import AStarSlide from './slides/AStarSlide.jsx';
 import AStarRaceSlide from './slides/AStarRaceSlide.jsx';
 import EndSlide from './slides/EndSlide.jsx';
 
@@ -22,6 +23,7 @@ export default function App() {
     >
       <IntroSlide />
       <DijkstraSlide />
+      <AStarSlide />
       <AStarRaceSlide />
       <EndSlide />
     </Deck>

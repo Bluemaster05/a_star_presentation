@@ -237,3 +237,106 @@ body,
   display: inline-block;
   width: 16px;
 }
+
+/* ---------- A* walkthrough ---------- */
+
+:root {
+  --heuristic: #c084fc;
+}
+
+.reveal .dijkstra.astar {
+  grid-template-columns: 1.15fr 1fr;
+  gap: 32px;
+  margin-top: 0;
+}
+
+.graph .plane line {
+  stroke: #2a2a2a;
+  stroke-width: 1;
+}
+.graph .plane .tick {
+  fill: var(--muted);
+  font-size: 14px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.astar-graph .edge line {
+  stroke-width: 3;
+}
+.astar-graph .edge.tree line,
+.astar-graph .edge.relaxing line {
+  stroke-width: 6;
+}
+.astar-graph .edge .weight {
+  font-size: 13px;
+}
+.astar-graph .vertex text {
+  font-size: 20px;
+}
+.astar-graph .vertex .coord {
+  font-size: 13px;
+  font-weight: 400;
+  fill: var(--muted);
+}
+.graph .vertex.open circle {
+  stroke: var(--relax);
+}
+.graph .vertex.goal circle {
+  stroke: #ef4444;
+  stroke-width: 4;
+}
+
+/* Straight-line heuristic from a vertex to the goal */
+.graph .heuristic line {
+  stroke: var(--heuristic);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 6;
+  animation: draw-in 0.5s ease-out;
+}
+.graph .heuristic rect {
+  fill: #191919;
+  stroke: var(--heuristic);
+  stroke-width: 1.5;
+}
+.graph .heuristic text {
+  fill: var(--heuristic);
+  font-size: 14px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+@keyframes draw-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.reveal table.astar-table {
+  font-size: 0.65em;
+}
+.reveal table.astar-table th,
+.reveal table.astar-table td {
+  padding: 0.2em 0.5em;
+}
+.reveal .astar-table td.h,
+.reveal .astar-key .h {
+  color: var(--heuristic);
+}
+.reveal .astar-table td.f,
+.reveal .astar-key .f {
+  color: var(--relax);
+  font-weight: 700;
+}
+.reveal .astar-key {
+  font-size: 0.45em;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+
+.reveal .caption.astar-caption {
+  font-size: 0.5em;
+  white-space: pre-line;
+  min-height: 4.5em;
+  margin-top: 4px;
+}
