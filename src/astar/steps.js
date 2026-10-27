@@ -1,5 +1,6 @@
-// Runs A* with a straight-line heuristic and records a snapshot of the table
-// after every visual step, mirroring dijkstra/steps.js.
+// Records a snapshot of the table after every visual step, mirroring
+// dijkstra/steps.js. Pass a heuristic for A*, or null for plain Dijkstra on
+// the same graph (priority is just g, and h is never computed).
 //
 // Each snapshot:
 //   rows:       { [vertex]: { known, g, h, path } }   (f is g + h)
@@ -22,27 +23,10 @@ function neighbors(edges, v) {
     .map((e) => ({ v: e.from === v ? e.to : e.from, weight: tenths(e.weight) }));
 }
 
-// Runs the same loop with any heuristic and returns how many vertices it expanded.
-// With h = 0 this is plain Dijkstra, which the final caption compares against.
-export function countExpansions(vertices, edges, start, goal, h) {
-  const g = Object.fromEntries(vertices.map(({ id }) => [id, Infinity]));
-  const known = new Set();
-  g[start] = 0;
-  for (;;) {
-    const open = vertices.map((v) => v.id).filter((id) => !known.has(id) && g[id] < Infinity);
-    if (open.length === 0) return known.size;
-    const v = open.reduce((best, id) => (g[id] + h(id) < g[best] + h(best) ? id : best));
-    known.add(v);
-    if (v === goal) return known.size;
-    for (const { v: w, weight } of neighbors(edges, v)) {
-      if (!known.has(w)) g[w] = Math.min(g[w], g[v] + weight);
-    }
-  }
-}
-
 export function buildSteps(vertices, edges, start, goal, heuristic) {
+  const isAStar = heuristic !== null;
   const pos = Object.fromEntries(vertices.map((v) => [v.id, v]));
-  const h = (id) => tenths(heuristic(id, goal));
+  const h = (id) => (isAStar ? tenths(heuristic(id, goal)) : 0);
   const hWork = (id) => {
     const dx = Math.abs(pos[id].x - pos[goal].x);
     const dy = Math.abs(pos[id].y - pos[goal].y);
@@ -69,8 +53,10 @@ export function buildSteps(vertices, edges, start, goal, heuristic) {
 
   snapshot({
     updated: [start],
-    heuristics: [start],
-    message: `Start at ${start}: g = 0. Estimate the rest with a straight line to ${goal}: h = ${hWork(start)}.`,
+    heuristics: isAStar ? [start] : [],
+    message: isAStar
+      ? `Start at ${start}: g = 0. Estimate the rest with a straight line to ${goal}: h = ${hWork(start)}.`
+      : `Dijkstra first: start at ${start} with cost 0, and head for ${goal}.`,
   });
 
   const f = (id) => rows[id].g + rows[id].h;
@@ -80,16 +66,21 @@ export function buildSteps(vertices, edges, start, goal, heuristic) {
     if (open.length === 0) break;
     const v = open.reduce((best, id) => (f(id) < f(best) ? id : best));
 
-    // Step 1: expand the open vertex with the lowest f = g + h.
+    // Step 1: expand the open vertex with the lowest priority.
     rows[v].known = true;
     const others = open.filter((id) => id !== v);
+    const reason = isAStar
+      ? `${v} has the lowest f = g + h (${fmt(rows[v].g)} + ${fmt(rows[v].h)} = ${fmt(f(v))}). `
+      : `${v} has the lowest cost (${fmt(rows[v].g)}). `;
     snapshot({
       current: v,
-      heuristics: open,
+      heuristics: isAStar ? open : [],
       message:
-        `${v} has the lowest f = g + h (${fmt(rows[v].g)} + ${fmt(rows[v].h)} = ${fmt(f(v))}). ` +
+        reason +
         (v === goal ? `It's the goal, so we stop here!` : 'Mark it known.') +
-        (others.length ? `\nOthers waiting: ${others.map((id) => `${id} f = ${fmt(f(id))}`).join(',  ')}` : ''),
+        (isAStar && others.length
+          ? `\nOthers waiting: ${others.map((id) => `${id} f = ${fmt(f(id))}`).join(',  ')}`
+          : ''),
     });
 
     if (v === goal) break;
@@ -110,32 +101,40 @@ export function buildSteps(vertices, edges, start, goal, heuristic) {
         rows[w].path = v;
         updated.push(w);
         notes.push(
-          `${w}: g = ${sum}` + (firstSeen ? `, h = ${hWork(w)}` : '') + `, f = ${fmt(f(w))}`
+          isAStar
+            ? `${w}: g = ${sum}` + (firstSeen ? `, h = ${hWork(w)}` : '') + `, f = ${fmt(f(w))}`
+            : `${w}: ${sum}`
         );
       } else {
-        notes.push(`${w}: g = ${sum} ≥ ${fmt(rows[w].g)}, no change`);
+        notes.push(`${w}: ${sum} ≥ ${fmt(rows[w].g)}, no change`);
       }
     }
     snapshot({
       current: v,
       relaxing,
       updated,
-      heuristics: relaxing.length ? relaxing.map((k) => k.split('-').find((id) => id !== v)) : [],
-      message:
-        relaxing.length === 0 ? `${v} has no unknown neighbors.` : notes.join('\n'),
+      heuristics: isAStar ? relaxing.map((k) => k.split('-').find((id) => id !== v)) : [],
+      message: relaxing.length === 0 ? `${v} has no unknown neighbors.` : notes.join('\n'),
     });
   }
 
   const finalPath = [];
   for (let v = goal; v; v = rows[v].path) finalPath.unshift(v);
-  const astarCount = Object.values(rows).filter((r) => r.known).length;
-  const dijkstraCount = countExpansions(vertices, edges, start, goal, () => 0);
-  snapshot({
-    finalPath,
-    message:
-      `Shortest path ${finalPath.join(' → ')} (cost ${fmt(rows[goal].g)}). ` +
-      `A* expanded ${astarCount} of ${vertices.length} vertices — Dijkstra would expand ${dijkstraCount}.`,
-  });
+  const expanded = Object.values(rows).filter((r) => r.known).length;
+  const summary = `Shortest path ${finalPath.join(' → ')} (cost ${fmt(rows[goal].g)}).`;
+  if (isAStar) {
+    const dijkstraExpanded = buildSteps(vertices, edges, start, goal, null).expanded;
+    snapshot({
+      finalPath,
+      message: `${summary} A* expanded ${expanded} of ${vertices.length} vertices — Dijkstra expanded ${dijkstraExpanded}.`,
+    });
+  } else {
+    snapshot({
+      finalPath,
+      message: `${summary} Dijkstra expanded ${expanded} of ${vertices.length} vertices to get there.`,
+    });
+  }
 
+  steps.expanded = expanded;
   return steps;
 }
