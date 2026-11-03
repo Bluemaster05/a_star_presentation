@@ -629,3 +629,9 @@ body,
   text-anchor: middle;
   dominant-baseline: central;
 }
+
+.reveal .card-who {
+  font-size: 0.5em;
+  font-weight: 600;
+  color: var(--relax);
+}
