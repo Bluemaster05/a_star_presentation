@@ -388,3 +388,244 @@ body,
 .reveal .astar-key.hidden {
   opacity: 0;
 }
+
+/* ---------- Section title cards ---------- */
+
+.reveal .section-number {
+  font-size: 3.2em;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.85;
+}
+.reveal .section-slide h2 {
+  margin-top: 0.2em;
+}
+
+/* ---------- Text slides ---------- */
+
+.reveal .hl {
+  color: var(--accent);
+  font-weight: 600;
+}
+.reveal .muted {
+  color: var(--muted);
+}
+.reveal .lead {
+  font-size: 0.85em;
+  max-width: 1000px;
+  margin: 0.4em auto 0.8em;
+}
+.reveal .points {
+  display: block;
+  text-align: left;
+  font-size: 0.7em;
+  max-width: 1000px;
+  margin: 0.6em auto;
+}
+.reveal .points li {
+  margin: 0.45em 0;
+}
+.reveal .points.small {
+  font-size: 0.6em;
+  margin: 0.4em 0 0 1em;
+}
+
+.reveal .problem {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.reveal .problem-side {
+  text-align: left;
+  font-size: 0.75em;
+}
+
+/* ---------- Associated algorithms ---------- */
+
+.reveal .algo-tag {
+  display: inline-block;
+  font-size: 0.5em;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+}
+.reveal .priority {
+  font-size: 0.55em;
+  color: #d1d5db;
+  margin: 0.6em 0 0.2em;
+}
+.reveal .priority code {
+  color: var(--relax);
+  background: #222;
+  padding: 2px 10px;
+  border-radius: 6px;
+}
+.reveal .verdict {
+  font-size: 0.65em;
+  font-weight: 700;
+  margin-top: 0.6em;
+}
+.reveal .verdict.ok {
+  color: #22c55e;
+}
+.reveal .verdict.warn {
+  color: var(--relax);
+}
+.reveal .verdict.bad {
+  color: #ef4444;
+}
+
+/* ---------- Dijkstra vs A* code ---------- */
+
+.reveal .code-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.reveal .code-compare pre {
+  width: 100%;
+  margin: 0;
+  font-size: 0.42em;
+  box-shadow: none;
+}
+.reveal .code-compare pre code {
+  max-height: 520px;
+}
+.reveal .code-title {
+  font-size: 0.5em;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 4px;
+}
+.reveal .code-title.astar {
+  color: var(--relax);
+}
+/* All captions occupy the same spot; fragments swap which one is showing. */
+.reveal .code-captions {
+  display: grid;
+  margin-top: 14px;
+  font-size: 0.55em;
+}
+.reveal .code-captions > p {
+  grid-area: 1 / 1;
+  margin: 0;
+}
+.reveal .code-captions > p.diff {
+  color: var(--relax);
+  font-weight: 600;
+}
+
+/* ---------- Complexity / correctness ---------- */
+
+.reveal .cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 10px;
+}
+.reveal .card {
+  background: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 18px 22px;
+  text-align: left;
+}
+.reveal .card-label {
+  font-size: 0.55em;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.reveal .card-label.astar {
+  color: var(--relax);
+}
+.reveal .big-o {
+  font-size: 1.15em;
+  font-weight: 700;
+  font-family: 'Consolas', 'Menlo', monospace;
+  margin: 0.15em 0;
+}
+.reveal .card-note {
+  font-size: 0.6em;
+  color: #d1d5db;
+  margin: 0.3em 0 0;
+}
+.reveal .takeaway {
+  font-size: 0.6em;
+  max-width: 1050px;
+  margin: 0.9em auto 0;
+  padding: 12px 20px;
+  border-left: 4px solid var(--accent);
+  background: rgba(66, 175, 250, 0.08);
+  text-align: left;
+}
+
+.reveal .formula {
+  display: inline-block;
+  font-family: 'Consolas', 'Menlo', monospace;
+  font-size: 0.95em;
+  color: var(--heuristic);
+  padding: 8px 24px;
+  border: 1.5px solid var(--heuristic);
+  border-radius: 10px;
+}
+.reveal .formula-key {
+  font-size: 0.5em;
+  margin: 0.4em 0 0;
+}
+
+.reveal .consistent {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: center;
+  text-align: left;
+}
+.reveal .consistent .formula {
+  font-size: 0.75em;
+}
+.reveal .triangle {
+  width: 100%;
+  height: auto;
+}
+.triangle .tri-edge {
+  stroke: var(--accent);
+  stroke-width: 4;
+}
+.triangle .tri-h {
+  stroke: var(--heuristic);
+  stroke-width: 3;
+  stroke-dasharray: 8 7;
+}
+.triangle .tri-label {
+  font-size: 20px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.triangle .edge-label {
+  fill: var(--accent);
+}
+.triangle .h-label {
+  fill: var(--heuristic);
+}
+.triangle .tri-node circle {
+  fill: #191919;
+  stroke: #e5e7eb;
+  stroke-width: 3;
+}
+.triangle .tri-node.goal circle {
+  stroke: #ef4444;
+}
+.triangle .tri-node text {
+  fill: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+}

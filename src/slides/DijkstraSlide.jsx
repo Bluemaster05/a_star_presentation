@@ -4,10 +4,10 @@ import { useFragmentStep } from '../hooks/useFragmentStep.js';
 import { vertices, edges, START } from '../dijkstra/graph.js';
 import { buildSteps, edgeKey } from '../dijkstra/steps.js';
 
-const steps = buildSteps(vertices, edges, START);
+export const steps = buildSteps(vertices, edges, START);
 const byId = Object.fromEntries(vertices.map((v) => [v.id, v]));
 
-function Graph({ state }) {
+export function Graph({ state }) {
   const { rows, current, relaxing } = state;
   const treeEdges = new Set(
     Object.entries(rows)
