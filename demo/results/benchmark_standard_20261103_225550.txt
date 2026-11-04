@@ -1,0 +1,197 @@
+A* benchmark  |  preset=standard  seed=42  repeats=3  budget=1,000,000  python=3.12.10
+Run at 2026-11-03 22:55:43
+
+== Random geometric 1,000  [random]  (1,000 nodes / 2,896 edges)
+   Random points, nearby points joined; corner to corner.
+Algorithm                      Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result              
+-----------------------------  -------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  --------------------
+Dijkstra (full graph)             1.04     0.9x       950         105.8%      1,312            76      55.64      100.0%          51  shortest            
+Dijkstra (stop at goal)           0.94     1.0x       898         100.0%      1,261            76      55.64      100.0%          51  shortest            
+A* (euclidean)                    0.67     1.4x       381          42.4%        641           101      55.64      100.0%          51  shortest            
+A* (manhattan)                    0.20     4.7x       122          13.6%        244            95      56.60      101.7%          49  longer than shortest
+Weighted A* (euclidean x2)        0.13     7.3x        66           7.3%        154            82      58.32      104.8%          47  longer than shortest
+Greedy best-first (euclidean)     0.08    11.2x        55           6.1%        137            83      65.30      117.4%          48  longer than shortest
+
+   Paths from 812 to 66 (full node lists are in the CSV):
+   Dijkstra (full graph)              52 nodes  812 -> 640 -> 791 -> 329 -> ... -> 161 -> 660 -> 974 -> 66
+   Dijkstra (stop at goal)            52 nodes  812 -> 640 -> 791 -> 329 -> ... -> 161 -> 660 -> 974 -> 66
+   A* (euclidean)                     52 nodes  812 -> 640 -> 791 -> 329 -> ... -> 161 -> 660 -> 974 -> 66
+   A* (manhattan)                     50 nodes  812 -> 640 -> 791 -> 329 -> ... -> 161 -> 660 -> 974 -> 66
+   Weighted A* (euclidean x2)         48 nodes  812 -> 640 -> 791 -> 329 -> ... -> 167 -> 929 -> 974 -> 66
+   Greedy best-first (euclidean)      49 nodes  812 -> 640 -> 791 -> 329 -> ... -> 164 -> 660 -> 974 -> 66
+
+== Random geometric 10,000  [random]  (10,000 nodes / 30,043 edges)
+   Random points, nearby points joined; corner to corner.
+Algorithm                      Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result              
+-----------------------------  -------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  --------------------
+Dijkstra (full graph)            14.37     0.9x     9,772         100.3%     13,682           222     196.92      100.0%         165  shortest            
+Dijkstra (stop at goal)          13.09     1.0x     9,747         100.0%     13,656           222     196.92      100.0%         165  shortest            
+A* (euclidean)                   13.68     1.0x     7,401          75.9%     11,568           448     196.92      100.0%         165  shortest            
+A* (manhattan)                    4.03     3.2x     2,322          23.8%      3,947           507     196.92      100.0%         165  shortest            
+Weighted A* (euclidean x2)        0.94    13.9x       517           5.3%        949           375     206.76      105.0%         162  longer than shortest
+Greedy best-first (euclidean)     0.50    26.0x       328           3.4%        671           344     269.59      136.9%         191  longer than shortest
+
+   Paths from 592 to 2655 (full node lists are in the CSV):
+   Dijkstra (full graph)             166 nodes  592 -> 3719 -> 4300 -> 1051 -> ... -> 7810 -> 8039 -> 1545 -> 2655
+   Dijkstra (stop at goal)           166 nodes  592 -> 3719 -> 4300 -> 1051 -> ... -> 7810 -> 8039 -> 1545 -> 2655
+   A* (euclidean)                    166 nodes  592 -> 3719 -> 4300 -> 1051 -> ... -> 7810 -> 8039 -> 1545 -> 2655
+   A* (manhattan)                    166 nodes  592 -> 3719 -> 4300 -> 1051 -> ... -> 7810 -> 8039 -> 1545 -> 2655
+   Weighted A* (euclidean x2)        163 nodes  592 -> 3719 -> 4300 -> 1051 -> ... -> 7810 -> 8039 -> 1545 -> 2655
+   Greedy best-first (euclidean)     192 nodes  592 -> 3719 -> 4300 -> 1051 -> ... -> 7810 -> 8039 -> 1545 -> 2655
+
+== Random geometric 50,000  [random]  (50,000 nodes / 149,731 edges)
+   Random points, nearby points joined; corner to corner.
+Algorithm                      Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result              
+-----------------------------  -------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  --------------------
+Dijkstra (full graph)           110.79     0.8x    49,116         100.0%     68,047           497     447.21      100.0%         402  shortest            
+Dijkstra (stop at goal)          87.29     1.0x    49,100         100.0%     68,031           497     447.21      100.0%         402  shortest            
+A* (euclidean)                   87.84     1.0x    35,144          71.6%     53,484           872     447.21      100.0%         402  shortest            
+A* (manhattan)                   14.77     5.9x     6,488          13.2%     10,623         1,232     448.56      100.3%         396  longer than shortest
+Weighted A* (euclidean x2)        4.29    20.3x     1,847           3.8%      3,237         1,035     473.26      105.8%         381  longer than shortest
+Greedy best-first (euclidean)     2.28    38.2x       854           1.7%      1,699           846     619.79      138.6%         447  longer than shortest
+
+   Paths from 47977 to 3776 (full node lists are in the CSV):
+   Dijkstra (full graph)             403 nodes  47977 -> 16860 -> 41970 -> 37757 -> ... -> 33403 -> 32210 -> 26933 -> 3776
+   Dijkstra (stop at goal)           403 nodes  47977 -> 16860 -> 41970 -> 37757 -> ... -> 33403 -> 32210 -> 26933 -> 3776
+   A* (euclidean)                    403 nodes  47977 -> 16860 -> 41970 -> 37757 -> ... -> 33403 -> 32210 -> 26933 -> 3776
+   A* (manhattan)                    397 nodes  47977 -> 16860 -> 41970 -> 37757 -> ... -> 33403 -> 32210 -> 26933 -> 3776
+   Weighted A* (euclidean x2)        382 nodes  47977 -> 16860 -> 37757 -> 16339 -> ... -> 33403 -> 32210 -> 26933 -> 3776
+   Greedy best-first (euclidean)     448 nodes  47977 -> 16860 -> 27579 -> 16339 -> ... -> 33403 -> 32210 -> 26933 -> 3776
+
+== Random maze 150x150  [random]  (16,871 nodes / 25,188 edges)
+   Grid with 25% random walls; corner to corner.
+Algorithm                      Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result              
+-----------------------------  -------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  --------------------
+Dijkstra (full graph)            22.97     1.1x    16,734         100.0%     16,734           140     298.00      100.0%         298  shortest            
+Dijkstra (stop at goal)          24.30     1.0x    16,734         100.0%     16,734           140     298.00      100.0%         298  shortest            
+A* (euclidean)                   27.37     0.9x    14,933          89.2%     15,135           234     298.00      100.0%         298  shortest            
+A* (manhattan)                    1.24    19.7x       569           3.4%        957           389     298.00      100.0%         298  shortest            
+Weighted A* (euclidean x2)        0.75    32.3x       377           2.3%        672           294     300.00      100.7%         300  longer than shortest
+Greedy best-first (euclidean)     0.64    38.2x       345           2.1%        626           282     316.00      106.0%         316  longer than shortest
+
+   Paths from (0, 0) to (149, 149) (full node lists are in the CSV):
+   Dijkstra (full graph)             299 nodes  (0, 0) -> (1, 0) -> (1, 1) -> (1, 2) -> ... -> (147, 148) -> (147, 149) -> (148, 149) -> (149, 149)
+   Dijkstra (stop at goal)           299 nodes  (0, 0) -> (1, 0) -> (1, 1) -> (1, 2) -> ... -> (147, 148) -> (147, 149) -> (148, 149) -> (149, 149)
+   A* (euclidean)                    299 nodes  (0, 0) -> (1, 0) -> (1, 1) -> (1, 2) -> ... -> (147, 148) -> (147, 149) -> (148, 149) -> (149, 149)
+   A* (manhattan)                    299 nodes  (0, 0) -> (1, 0) -> (1, 1) -> (1, 2) -> ... -> (147, 148) -> (147, 149) -> (148, 149) -> (149, 149)
+   Weighted A* (euclidean x2)        301 nodes  (0, 0) -> (1, 0) -> (1, 1) -> (1, 2) -> ... -> (147, 148) -> (147, 149) -> (148, 149) -> (149, 149)
+   Greedy best-first (euclidean)     317 nodes  (0, 0) -> (1, 0) -> (1, 1) -> (1, 2) -> ... -> (147, 148) -> (147, 149) -> (148, 149) -> (149, 149)
+
+== Open grid 150x150  [good]  (22,500 nodes / 44,700 edges)
+   No obstacles, goal straight ahead. Heuristic is nearly perfect.
+Algorithm                      Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result  
+-----------------------------  -------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  --------
+Dijkstra (full graph)            30.65     0.8x    22,500         133.3%     22,500           150     149.00      100.0%         149  shortest
+Dijkstra (stop at goal)          23.16     1.0x    16,875         100.0%     17,024           150     149.00      100.0%         149  shortest
+A* (euclidean)                    0.41    56.8x       150           0.9%        448           299     149.00      100.0%         149  shortest
+A* (manhattan)                    0.40    57.7x       150           0.9%        448           299     149.00      100.0%         149  shortest
+Weighted A* (euclidean x2)        0.37    62.0x       150           0.9%        448           299     149.00      100.0%         149  shortest
+Greedy best-first (euclidean)     0.29    80.4x       150           0.9%        448           299     149.00      100.0%         149  shortest
+
+   Paths from (0, 75) to (149, 75) (full node lists are in the CSV):
+   Dijkstra (full graph)             150 nodes  (0, 75) -> (1, 75) -> (2, 75) -> (3, 75) -> ... -> (146, 75) -> (147, 75) -> (148, 75) -> (149, 75)
+   Dijkstra (stop at goal)           150 nodes  (0, 75) -> (1, 75) -> (2, 75) -> (3, 75) -> ... -> (146, 75) -> (147, 75) -> (148, 75) -> (149, 75)
+   A* (euclidean)                    150 nodes  (0, 75) -> (1, 75) -> (2, 75) -> (3, 75) -> ... -> (146, 75) -> (147, 75) -> (148, 75) -> (149, 75)
+   A* (manhattan)                    150 nodes  (0, 75) -> (1, 75) -> (2, 75) -> (3, 75) -> ... -> (146, 75) -> (147, 75) -> (148, 75) -> (149, 75)
+   Weighted A* (euclidean x2)        150 nodes  (0, 75) -> (1, 75) -> (2, 75) -> (3, 75) -> ... -> (146, 75) -> (147, 75) -> (148, 75) -> (149, 75)
+   Greedy best-first (euclidean)     150 nodes  (0, 75) -> (1, 75) -> (2, 75) -> (3, 75) -> ... -> (146, 75) -> (147, 75) -> (148, 75) -> (149, 75)
+
+== Trap grid 150x150  [bad]  (22,349 nodes / 44,246 edges)
+   Start inside a cup facing away from the goal. Heuristic misleads.
+Algorithm                      Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result              
+-----------------------------  -------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  --------------------
+Dijkstra (full graph)            32.16     0.9x    22,349         109.6%     22,349           150     199.00      100.0%         199  shortest            
+Dijkstra (stop at goal)          27.70     1.0x    20,391         100.0%     20,506           150     199.00      100.0%         199  shortest            
+A* (euclidean)                   15.74     1.8x     9,902          48.6%     10,298           460     199.00      100.0%         199  shortest            
+A* (manhattan)                    4.43     6.3x     3,100          15.2%      3,338           239     199.00      100.0%         199  shortest            
+Weighted A* (euclidean x2)        4.32     6.4x     2,913          14.3%      3,157           245     199.00      100.0%         199  shortest            
+Greedy best-first (euclidean)     3.69     7.5x     2,717          13.3%      2,961           245     247.00      124.1%         247  longer than shortest
+
+   Paths from (37, 75) to (132, 75) (full node lists are in the CSV):
+   Dijkstra (full graph)             200 nodes  (37, 75) -> (36, 75) -> (35, 75) -> (34, 75) -> ... -> (129, 75) -> (130, 75) -> (131, 75) -> (132, 75)
+   Dijkstra (stop at goal)           200 nodes  (37, 75) -> (36, 75) -> (35, 75) -> (34, 75) -> ... -> (129, 75) -> (130, 75) -> (131, 75) -> (132, 75)
+   A* (euclidean)                    200 nodes  (37, 75) -> (37, 74) -> (37, 73) -> (37, 72) -> ... -> (130, 74) -> (131, 74) -> (131, 75) -> (132, 75)
+   A* (manhattan)                    200 nodes  (37, 75) -> (36, 75) -> (35, 75) -> (34, 75) -> ... -> (129, 75) -> (130, 75) -> (131, 75) -> (132, 75)
+   Weighted A* (euclidean x2)        200 nodes  (37, 75) -> (37, 74) -> (37, 73) -> (37, 72) -> ... -> (130, 74) -> (131, 74) -> (131, 75) -> (132, 75)
+   Greedy best-first (euclidean)     248 nodes  (37, 75) -> (38, 75) -> (39, 75) -> (40, 75) -> ... -> (130, 74) -> (131, 74) -> (131, 75) -> (132, 75)
+
+== Unreachable goal 150x150  [bad]  (22,492 nodes / 44,676 edges)
+   Goal is boxed in: everyone must explore the whole graph.
+Algorithm                      Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result 
+-----------------------------  -------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  -------
+Dijkstra (full graph)            27.33     1.0x    22,491         100.0%     22,491           150          -           -           -  no path
+Dijkstra (stop at goal)          26.14     1.0x    22,491         100.0%     22,491           150          -           -           -  no path
+A* (euclidean)                   36.03     0.7x    22,491         100.0%     22,491           292          -           -           -  no path
+A* (manhattan)                   64.91     0.4x    22,491         100.0%     43,949        21,750          -           -           -  no path
+Weighted A* (euclidean x2)      103.32     0.3x    53,148         236.3%     73,800           852          -           -           -  no path
+Greedy best-first (euclidean)    34.96     0.7x    22,491         100.0%     22,491           299          -           -           -  no path
+
+== Infinite grid, goal 50 away  [infinite]  (infinite)
+   Grid that never ends (20% walls). Dijkstra can't finish the whole graph.
+Algorithm                      Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result                                 
+-----------------------------  -------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  ---------------------------------------
+Dijkstra (full graph)                -        -         -              -          -             -          -           -           -  skipped: can't finish an infinite graph
+Dijkstra (stop at goal)          14.39     1.0x     6,544         100.0%      6,745           203      66.00      100.0%          66  shortest                               
+A* (euclidean)                    1.75     8.2x       788          12.0%        889           105      66.00      100.0%          66  shortest                               
+A* (manhattan)                    0.73    19.6x       312           4.8%        513           202      66.00      100.0%          66  shortest                               
+Weighted A* (euclidean x2)        0.18    80.1x        69           1.1%        143            75      66.00      100.0%          66  shortest                               
+Greedy best-first (euclidean)     0.15    94.9x        69           1.1%        143            75      66.00      100.0%          66  shortest                               
+
+   Paths from (0, 0) to (50, 16) (full node lists are in the CSV):
+   Dijkstra (stop at goal)            67 nodes  (0, 0) -> (0, 1) -> (0, 2) -> (0, 3) -> ... -> (48, 15) -> (49, 15) -> (49, 16) -> (50, 16)
+   A* (euclidean)                     67 nodes  (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> ... -> (48, 15) -> (49, 15) -> (49, 16) -> (50, 16)
+   A* (manhattan)                     67 nodes  (0, 0) -> (0, 1) -> (0, 2) -> (0, 3) -> ... -> (48, 15) -> (49, 15) -> (49, 16) -> (50, 16)
+   Weighted A* (euclidean x2)         67 nodes  (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> ... -> (48, 15) -> (49, 15) -> (49, 16) -> (50, 16)
+   Greedy best-first (euclidean)      67 nodes  (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> ... -> (48, 15) -> (49, 15) -> (49, 16) -> (50, 16)
+
+== Infinite grid, goal 200 away  [infinite]  (infinite)
+   Grid that never ends (20% walls). Dijkstra can't finish the whole graph.
+Algorithm                      Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result                                 
+-----------------------------  -------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  ---------------------------------------
+Dijkstra (full graph)                -        -         -              -          -             -          -           -           -  skipped: can't finish an infinite graph
+Dijkstra (stop at goal)         255.39     1.0x   108,968         100.0%    109,764           841     268.00      100.0%         268  shortest                               
+A* (euclidean)                   33.21     7.7x    14,706          13.5%     15,105           417     268.00      100.0%         268  shortest                               
+A* (manhattan)                   15.32    16.7x     5,527           5.1%      8,382         2,271     268.00      100.0%         268  shortest                               
+Weighted A* (euclidean x2)        0.79   325.3x       290           0.3%        601           312     270.00      100.7%         270  longer than shortest                   
+Greedy best-first (euclidean)     0.68   377.7x       286           0.3%        593           308     280.00      104.5%         280  longer than shortest                   
+
+   Paths from (0, 0) to (200, 66) (full node lists are in the CSV):
+   Dijkstra (stop at goal)           269 nodes  (0, 0) -> (0, 1) -> (0, 2) -> (0, 3) -> ... -> (197, 66) -> (198, 66) -> (199, 66) -> (200, 66)
+   A* (euclidean)                    269 nodes  (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> ... -> (198, 65) -> (199, 65) -> (199, 66) -> (200, 66)
+   A* (manhattan)                    269 nodes  (0, 0) -> (0, 1) -> (0, 2) -> (0, 3) -> ... -> (197, 66) -> (198, 66) -> (199, 66) -> (200, 66)
+   Weighted A* (euclidean x2)        271 nodes  (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> ... -> (198, 65) -> (199, 65) -> (199, 66) -> (200, 66)
+   Greedy best-first (euclidean)     281 nodes  (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> ... -> (198, 67) -> (199, 67) -> (199, 66) -> (200, 66)
+
+== Infinite grid, goal 500 away  [infinite]  (infinite)
+   Grid that never ends (20% walls). Dijkstra can't finish the whole graph.
+Algorithm                       Time ms  Speedup  Explored  % of Dijkstra  Generated  Max frontier  Path cost  vs optimal  Path edges  Result                                 
+-----------------------------  --------  -------  --------  -------------  ---------  ------------  ---------  ----------  ----------  ---------------------------------------
+Dijkstra (full graph)                 -        -         -              -          -             -          -           -           -  skipped: can't finish an infinite graph
+Dijkstra (stop at goal)        1,945.80     1.0x   685,338         100.0%    687,291         2,091     672.00      100.0%         672  shortest                               
+A* (euclidean)                   234.67     8.3x    94,089          13.7%     95,076         1,035     672.00      100.0%         672  shortest                               
+A* (manhattan)                   102.49    19.0x    33,886           4.9%     48,332        10,223     672.00      100.0%         672  shortest                               
+Weighted A* (euclidean x2)         2.42   803.1x       830           0.1%      1,640           802     696.00      103.6%         696  longer than shortest                   
+Greedy best-first (euclidean)      1.94  1003.7x       712           0.1%      1,492           781     698.00      103.9%         698  longer than shortest                   
+
+   Paths from (0, 0) to (500, 166) (full node lists are in the CSV):
+   Dijkstra (stop at goal)           673 nodes  (0, 0) -> (0, 1) -> (0, 2) -> (0, 3) -> ... -> (497, 166) -> (498, 166) -> (499, 166) -> (500, 166)
+   A* (euclidean)                    673 nodes  (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> ... -> (498, 165) -> (499, 165) -> (499, 166) -> (500, 166)
+   A* (manhattan)                    673 nodes  (0, 0) -> (0, 1) -> (0, 2) -> (0, 3) -> ... -> (497, 166) -> (498, 166) -> (499, 166) -> (500, 166)
+   Weighted A* (euclidean x2)        697 nodes  (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> ... -> (498, 165) -> (499, 165) -> (499, 166) -> (500, 166)
+   Greedy best-first (euclidean)     699 nodes  (0, 0) -> (1, 0) -> (2, 0) -> (3, 0) -> ... -> (498, 165) -> (499, 165) -> (499, 166) -> (500, 166)
+
+============================== SUMMARY ==============================
+Explored nodes and speedup are relative to Dijkstra (stop at goal).
+
+Scenario                      A* (euclidean)    A* (manhattan)              Weighted A* (euclidean x2)   Greedy best-first (euclidean)
+----------------------------  ----------------  --------------------------  ---------------------------  -----------------------------
+Random geometric 1,000        42% nodes, 1.4x   14% nodes, 4.7x (+2% cost)  7% nodes, 7.3x (+5% cost)    6% nodes, 11.2x (+17% cost)  
+Random geometric 10,000       76% nodes, 1.0x   24% nodes, 3.2x             5% nodes, 13.9x (+5% cost)   3% nodes, 26.0x (+37% cost)  
+Random geometric 50,000       72% nodes, 1.0x   13% nodes, 5.9x (+0% cost)  4% nodes, 20.3x (+6% cost)   2% nodes, 38.2x (+39% cost)  
+Random maze 150x150           89% nodes, 0.9x   3% nodes, 19.7x             2% nodes, 32.3x (+1% cost)   2% nodes, 38.2x (+6% cost)   
+Open grid 150x150             1% nodes, 56.8x   1% nodes, 57.7x             1% nodes, 62.0x              1% nodes, 80.4x              
+Trap grid 150x150             49% nodes, 1.8x   15% nodes, 6.3x             14% nodes, 6.4x              13% nodes, 7.5x (+24% cost)  
+Unreachable goal 150x150      100% nodes, 0.7x  100% nodes, 0.4x            236% nodes, 0.3x             100% nodes, 0.7x             
+Infinite grid, goal 50 away   12% nodes, 8.2x   5% nodes, 19.6x             1% nodes, 80.1x              1% nodes, 94.9x              
+Infinite grid, goal 200 away  13% nodes, 7.7x   5% nodes, 16.7x             0% nodes, 325.3x (+1% cost)  0% nodes, 377.7x (+4% cost)  
+Infinite grid, goal 500 away  14% nodes, 8.3x   5% nodes, 19.0x             0% nodes, 803.1x (+4% cost)  0% nodes, 1003.7x (+4% cost) 

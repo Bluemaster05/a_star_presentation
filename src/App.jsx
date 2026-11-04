@@ -15,6 +15,7 @@ import AStarSlide from './slides/AStarSlide.jsx';
 import AStarRaceSlide from './slides/AStarRaceSlide.jsx';
 import { TimeComplexitySlide, SpaceComplexitySlide } from './slides/ComplexitySlides.jsx';
 import { CorrectnessSlide, AdmissibleSlide, ConsistentSlide } from './slides/CorrectnessSlides.jsx';
+import { ResultsOverviewSlide, ScenarioSlides } from './slides/ResultsSlides.jsx';
 import EndSlide from './slides/EndSlide.jsx';
 
 export default function App() {
@@ -58,6 +59,10 @@ export default function App() {
       <CorrectnessSlide />
       <AdmissibleSlide />
       <ConsistentSlide />
+
+      <SectionSlide number={9} title="Results" subtitle="Dijkstra vs A* vs Greedy, benchmarked in Python" />
+      <ResultsOverviewSlide />
+      <ScenarioSlides />
 
       <EndSlide />
     </Deck>
